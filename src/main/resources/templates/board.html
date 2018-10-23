@@ -1,0 +1,19 @@
+<html>
+<body>
+	<h1>Tablón Anuncios</h1>
+	{{#rosters}}
+	<a href="roster/{{id}}">{{nombre}} {{asunto}}</a><br>
+	{{/rosters}}
+	   
+	{{#showPrev}}
+	<a href="/?page={{prevPage}}">Prev</a>
+	{{/showPrev}}
+	{{numPage}}
+	{{#showNext}}
+	<a href="/?page={{nextPage}}">Next</a>
+	{{/showNext}}
+	
+	<br>
+	<a href="newRoster.html">Nuevo anuncio</a>
+</body>
+</html>	
