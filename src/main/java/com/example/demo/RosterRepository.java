@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.example.demo.Models.Roster;
+
 
 public interface RosterRepository extends JpaRepository<Roster, Long> {
 

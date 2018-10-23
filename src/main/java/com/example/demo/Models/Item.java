@@ -1,8 +1,8 @@
-package com.example.demo;
+package com.example.demo.Models;
 
 import javax.persistence.*;
 
-//@Entity
+@Entity
 public class Item {
 
 	@Id
@@ -14,6 +14,9 @@ public class Item {
 
 	@Column
 	private String description;
+	@ManyToOne
+	private Roster roster;
+
 
 	public Integer getId() {
 		return id;

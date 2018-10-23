@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.Models.Roster;
+
 @Controller
 public class RosterBoardController {
 
@@ -29,15 +31,13 @@ public class RosterBoardController {
 	@RequestMapping("/")
 	public String board(Model model, Pageable page) {
 		
-		System.out.println(page);
-
 		Page<Roster> rosters = repository.findAll(page);
 		
 		model.addAttribute("rosters", rosters);
 		
 		model.addAttribute("showNext", !rosters.isLast());
 		model.addAttribute("showPrev", !rosters.isFirst());
-		model.addAttribute("numPage", rosters.getNumber());
+		model.addAttribute("numPage", rosters.getNumber()+1);
 		model.addAttribute("nextPage", rosters.getNumber()+1);
 		model.addAttribute("prevPage", rosters.getNumber()-1);
 		
