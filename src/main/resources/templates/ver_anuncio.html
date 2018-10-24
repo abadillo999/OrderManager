@@ -1,9 +1,21 @@
 <html>
+<head>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="../js/script.js"></script>
+</head>
+
 <body>
-	<p>Nombre: {{roster.nombre}}</p>
-	<p>Asunto: {{roster.asunto}}</p>
-	<p>Comentario: {{roster.comentario}}</p>
-	
+    <h1>Nombre: {{roster.nombre}}</h1>
+    <hr>
+	<p>Asunto: </p>
+	<p>Comentario: </p>
+
+    <input id='name-input' type='text'>
+    <input id='description-input' type='text'>
+    <button id='add-button'>Add</button>
+    <div id='info'>
+
+    </div>
 	<a href="/">Volver al tablón</a>
 </body>
 </html>

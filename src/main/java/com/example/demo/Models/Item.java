@@ -9,14 +9,24 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column
 	private boolean checked;
-
-	@Column
+	private String name;
 	private String description;
+	
+	
 	@ManyToOne
 	private Roster roster;
+	
+	protected Item() {
+		
+	}
 
+	public Item (String name, String description) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.checked = false;
+	}
 
 	public Integer getId() {
 		return id;
