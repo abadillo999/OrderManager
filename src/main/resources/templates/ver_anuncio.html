@@ -5,7 +5,7 @@
 </head>
 
 <body>
-    <h1>Nombre: {{roster.nombre}}</h1>
+    <h1>Nombre: {{roster.title}}</h1>
     <hr>
 	<p>Asunto: </p>
 	<p>Comentario: </p>
@@ -15,6 +15,12 @@
     <button id='add-button'>Add</button>
     <div id='info'>
 
+	{{#items}}
+	 <div><input type="checkbox"><span>{{name}}</span><span>{{description}}</span> <button id="delete-button">Delete</button></div>
+	{{/items}}
+
+	<!---->
+            
     </div>
 	<a href="/">Volver al tablón</a>
 </body>

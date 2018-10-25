@@ -10,60 +10,53 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
-
 @Entity
 public class Roster {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	long id;
 
-	String nombre;
+	String title;
 	String asunto;
 	String comentario;
-	
-	@OneToMany(mappedBy="roster")
+
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Item> items = new ArrayList<>();
-	
+
 	protected Roster() {
 
 	}
 
-	public Roster(String nombre, String asunto, String comentario) {
+	public Roster(String title) {
 		super();
-		this.nombre = nombre;
-		this.asunto = asunto;
-		this.comentario = comentario;
+		this.title = title;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public Roster(String title, Item item) {
+		super();
+		this.title = title;
+		this.items.add(item);
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public String getTitle() {
+		return title;
 	}
 
-	public String getAsunto() {
-		return asunto;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public void setAsunto(String asunto) {
-		this.asunto = asunto;
+	public List<Item> getItems() {
+		return items;
 	}
 
-	public String getComentario() {
-		return comentario;
+	public void setItems(List<Item> newList) {
+		this.items = newList;
 	}
 
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-
-	@Override
-	public String toString() {
-		return "Anuncio [nombre=" + nombre + ", asunto=" + asunto + ", comentario=" + comentario + "]";
+	public void setItem(Item item) {
+		this.items.add(item);		
 	}
 
 }

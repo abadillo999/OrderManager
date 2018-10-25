@@ -14,8 +14,7 @@ public class Item {
 	private String description;
 	
 	
-	@ManyToOne
-	private Roster roster;
+
 	
 	protected Item() {
 		
@@ -50,5 +49,12 @@ public class Item {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

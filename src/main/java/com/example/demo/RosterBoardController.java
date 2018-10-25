@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,28 +12,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.Models.Item;
 import com.example.demo.Models.Roster;
 
 @Controller
 public class RosterBoardController {
 
 	@Autowired
-	private RosterRepository repository;
+	private RosterRepository rosterRepository;
+	private ItemRepository itemRepository;
 
 	//private List<Order> orders = new ArrayList<>();
 	//private List<Item> items = new ArrayList<>();
 
 	@PostConstruct
 	public void init() {
-		for(int i=0; i<100; i++){
-			repository.save(new Roster("Pepe", "Anuncio"+i, "XXXX"));
-		}		
+	
 	}
 
 	@RequestMapping("/")
 	public String board(Model model, Pageable page) {
 		
-		Page<Roster> rosters = repository.findAll(page);
+		Page<Roster> rosters = rosterRepository.findAll(page);
 		
 		model.addAttribute("rosters", rosters);
 		
@@ -46,8 +48,20 @@ public class RosterBoardController {
 	@RequestMapping("/roster/new")
 	public String newRoster(Model model, Roster roster ) {
 
-		repository.save(roster);
+		rosterRepository.save(roster);
 
+		return "roster_saved";
+
+	}
+	@RequestMapping("/roster/new1")
+	public String newRosterItem(Model model, Roster roster, Item item ) {
+		System.out.println(item.getDescription());
+		System.out.println(item.getName());
+		//rosterRepository.save(roster);
+		//itemRepository.save(item);
+
+		roster.setItem(item);
+		rosterRepository.save(roster);
 		return "roster_saved";
 
 	}
@@ -55,9 +69,13 @@ public class RosterBoardController {
 	@RequestMapping("/roster/{id}")
 	public String viewOrder(Model model, @PathVariable long id) {
 
-		Roster roster =  repository.findOne(id);
+		Roster roster =  rosterRepository.findOne(id);
 
 		model.addAttribute("roster", roster);
+		model.addAttribute("items", roster.getItems());
+		
+		System.out.println(roster.getItems().size());
+		System.out.println(roster.getItems().size());
 
 		return "ver_anuncio";
 	}
