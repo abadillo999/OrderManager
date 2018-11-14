@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RosterManagerApplication {
+public class OrderManagerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RosterManagerApplication.class, args);
+		SpringApplication.run(OrderManagerApplication.class, args);
 	}
 }

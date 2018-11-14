@@ -7,22 +7,22 @@
 
 <body>
 	<h1>Tablón Anuncios</h1>
-	<div class="jumbotron">
-		{{#rosters}}
-		<a href="roster/{{id}}">{{title}}</a><br>
-		{{/rosters}}
+	<div class="list-group">
+		{{#orders}}
+		<a class="list-group-item list-group-item-action" href="order/{{id}}">{{title}}</a>
+		{{/orders}}
 
-		{{#showPrev}}
+	<!--	{{#showPrev}}
 		<a href="/?page={{prevPage}}">Prev</a>
 		{{/showPrev}}
 		{{numPage}}
 		{{#showNext}}
 		<a href="/?page={{nextPage}}">Next</a>
-		{{/showNext}}
+		{{/showNext}}-->
 
-		<br>
 	</div>
-	<a href="newRoster.html">Nuevo anuncio</a>
+	<br>
+	<a href="newOrder.html">Nuevo anuncio</a>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Roster {
+public class OrderItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,16 +24,16 @@ public class Roster {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Item> items = new ArrayList<>();
 
-	protected Roster() {
+	protected OrderItem() {
 
 	}
 
-	public Roster(String title) {
+	public OrderItem(String title) {
 		super();
 		this.title = title;
 	}
 
-	public Roster(String title, Item item) {
+	public OrderItem(String title, Item item) {
 		super();
 		this.title = title;
 		this.items.add(item);
