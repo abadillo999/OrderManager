@@ -2,19 +2,19 @@ $(document).ready(function () {
 
     var name = $('#name-input')
     var description = $('#description-input')
-    var info = $('#info')
+    var table = $('#table')
 
-    info.change(function (event) {
+    table.change(function (event) {
         var checkbox = $(event.target);
         var text = checkbox.parent().find('span');
         var style = checkbox.prop('checked') ? 'line-through' : 'none';
         text.css('text-decoration', style);
     })
 
-    info.click(function (event) {
+    table.click(function (event) {
         var elem = $(event.target);
         if (elem.is('button')) {
-            elem.parent().remove();
+            elem.parent().parent().parent().remove();
         }
     })
 
@@ -23,8 +23,19 @@ $(document).ready(function () {
         var descriptionValue = description.val();
         name.val('');
         description.val('');
-        info.append(
-            '<div><input type="checkbox"><span>' + nameValue +
-            '</span><span>' + descriptionValue +'</span> <button id="delete-button">Delete</button></div>')
-    })
+        table.append(
+            '<li class="list-group-item">\
+                <div class="input-group">\
+                    <div class="input-group-prepend">\
+                        <div class="input-group-text">\
+                            <input type="checkbox" aria-label="Checkbox for following text input">\
+                        </div>\
+                    </div>\
+                    <span class="input-group-text">'+ nameValue + '</span><span class="input-group-text">'+ descriptionValue +'</span></div>\
+                        <div class="input-group-append">\
+                            <button class="btn btn-outline-secondary" type="button" id="delete-button">Delete</button>\
+                        </div>\
+                </div>\
+            </li>')
+            })
 })
