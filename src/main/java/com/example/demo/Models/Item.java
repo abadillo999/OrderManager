@@ -7,31 +7,33 @@ public class Item {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	private boolean checked;
-	private String name;
-	private String description;
+	private String name;	
 	
-	
-
 	
 	protected Item() {
 		
 	}
 
-	public Item (String name, String description) {
+	public Item (String name) {
 		super();
 		this.name = name;
-		this.description = description;
 		this.checked = false;
 	}
 
-	public Integer getId() {
+	public Item (String name, Boolean checked) {
+		super();
+		this.name = name;
+		this.checked = checked;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -43,13 +45,6 @@ public class Item {
 		this.checked = checked;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 	public String getName() {
 		return name;
 	}

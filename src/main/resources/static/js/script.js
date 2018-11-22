@@ -1,41 +1,39 @@
-$(document).ready(function () {
 
-    var name = $('#name-input')
-    var description = $('#description-input')
-    var table = $('#table')
+checkItem = function(orderId, itemId, check) {
+    console.log(check)
+    fetch(`/order/${orderId}/item/${itemId}`, {
+        method: 'PUT', 
+        body:  JSON.stringify(check.checked),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+    }).then(location.reload());
 
-    table.change(function (event) {
-        var checkbox = $(event.target);
-        var text = checkbox.parent().find('span');
-        var style = checkbox.prop('checked') ? 'line-through' : 'none';
-        text.css('text-decoration', style);
-    })
+}
 
-    table.click(function (event) {
-        var elem = $(event.target);
-        if (elem.is('button')) {
-            elem.parent().parent().parent().remove();
-        }
-    })
+addItem = (orderId, name_input) => {
+    fetch(`/order/${orderId}/item`, {
+        method: 'PUT', 
+        body:  JSON.stringify({
+                
+                    "name":name_input.value
+                }),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+    }).then(location.reload());
+    name_input.value = '';
+}
 
-    $("#add-button").click(function () {
-        var nameValue = name.val();
-        var descriptionValue = description.val();
-        name.val('');
-        description.val('');
-        table.append(
-            '<li class="list-group-item">\
-                <div class="input-group">\
-                    <div class="input-group-prepend">\
-                        <div class="input-group-text">\
-                            <input type="checkbox" aria-label="Checkbox for following text input">\
-                        </div>\
-                    </div>\
-                    <span class="input-group-text">'+ nameValue + '</span><span class="input-group-text">'+ descriptionValue +'</span></div>\
-                        <div class="input-group-append">\
-                            <button class="btn btn-outline-secondary" type="button" id="delete-button">Delete</button>\
-                        </div>\
-                </div>\
-            </li>')
-            })
-})
+deleteOrder = (id) => {
+
+    fetch(`/order/${id}`, {
+        method: 'DELETE'
+    }).then(window.location.replace(`/`));
+}
+
+deleteItem = (orderId, itemId) => {
+    fetch(`/order/${orderId}/item/${itemId}`, {
+        method: 'DELETE'
+    }).then(location.reload());
+}

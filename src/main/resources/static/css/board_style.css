@@ -1,0 +1,5 @@
+#main_board:before{
+    content: attr(data-empty-message);
+    position: absolute;
+}
+  

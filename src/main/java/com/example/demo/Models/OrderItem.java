@@ -2,6 +2,7 @@ package com.example.demo.Models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,8 +19,6 @@ public class OrderItem {
 	long id;
 
 	String title;
-	String asunto;
-	String comentario;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Item> items = new ArrayList<>();
@@ -57,6 +56,21 @@ public class OrderItem {
 
 	public void setItem(Item item) {
 		this.items.add(item);		
+	}
+
+	public void deleteById(Long itemId) {
+		this.items.remove(this.getItem(itemId).get());
+
+	}
+
+	private Optional<Item> getItem(Long itemId) {
+		return items.stream().filter(item-> item.getId()==itemId).findAny();
+		
+	}
+
+	public void updateItem(Long itemId, Boolean check) {
+		this.getItem(itemId).get().setChecked(check);
+
 	}
 
 }
