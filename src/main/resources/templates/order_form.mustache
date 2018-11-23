@@ -40,7 +40,13 @@
 		{{/order}}
 		<br>
 		<input type='submit' value='submit' class="btn btn-primary"/>
-		<a href="/" class="btn btn-secondary">Cancel</a>
+		{{#order}}
+			<a href="order/{{order.id}}" class="btn btn-secondary">Cancel</a>
+		{{/order}}
+		{{^order}}
+			<a href="/" class="btn btn-secondary">Cancel</a>
+		{{/order}}
+		
 	</form>
 </body>
 

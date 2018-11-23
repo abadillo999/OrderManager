@@ -3,12 +3,9 @@ package com.example.demo;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.tomcat.util.http.fileupload.FileItemStream.ItemSkippedException;
-import org.hibernate.internal.CriteriaImpl.OrderEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,7 +36,7 @@ public class OrderBoardController {
 	public void init() {
 		OrderItem order1 = new OrderItem("Household");
 		OrderItem order2 = new OrderItem("Groceries");
-		OrderItem order3 = new OrderItem("Household");
+		OrderItem order3 = new OrderItem("Others");
 		order1.setItems(Arrays.asList(new Item("Bleach", true), new Item("Mop")));
 		order2.setItems(Arrays.asList(new Item("Apples"), new Item("Potatoes"), new Item("Eggs")));
 
@@ -51,8 +47,6 @@ public class OrderBoardController {
 
 	}
 
-	// private List<Order> orders = new ArrayList<>();
-	// private List<Item> items = new ArrayList<>();
 
 	@GetMapping(value = "/")
 
@@ -152,7 +146,6 @@ public class OrderBoardController {
 	}
 	@PutMapping("/order/{orderId}/item/{itemId}")
 	public OrderItem checkItem(Model model, @PathVariable long orderId, @PathVariable long itemId, @RequestBody Boolean check) {
-		System.out.println("asasd");
 		OrderItem order = orderRepository.findById(orderId).orElseThrow(NotFoundException::new);
 		
 		order.updateItem(itemId, check);
@@ -166,7 +159,6 @@ public class OrderBoardController {
 	@DeleteMapping("/order/{orderId}/item/{itemId}")
 	public String deleteItem(Model model, @PathVariable long orderId, @PathVariable Long itemId) {
 		OrderItem order = orderRepository.findById(orderId).orElseThrow(NotFoundException::new);
-		System.out.println("asdasd");
 
 		order.deleteById(itemId);
 
